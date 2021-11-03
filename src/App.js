@@ -14,6 +14,7 @@ class App extends React.Component {
     this.addTask = this.addTask.bind(this)
     this.deleteTask = this.deleteTask.bind(this)
     this.modifyTask = this.modifyTask.bind(this)
+    this.ValidTask = this.ValidTask.bind(this)
   }
 
   addTask(string) {
@@ -31,19 +32,30 @@ class App extends React.Component {
     // const array = this.state.tasks
     // array.splice(index,1)
     this.setState({editeLine:index})
-    console.log(index);
-
+    // console.log(index);
+  }
+  ValidTask(index,newTask) {  
+    let array = this.state.tasks
+     array[index].description = newTask
+     this.setState({tasks:array, editeLine:null})
+    // task=newTask
+    // console.log(`task: ${task}, newTask: ${newTask}`);
+    console.log(this.state.tasks[index].description);
   }
 
   render() {
     return(
       <div className="container py-5 ">
+
         <h1 className="mb-5 text-center">To-do List</h1>
         <Form addTask={this.addTask}/>
         <List tasks={this.state.tasks}  
-        onclickdelete={this.deleteTask} 
-        onclickmodify={this.modifyTask}
-        editeLine={this.state.editeLine}/>
+          onclickdelete={this.deleteTask} 
+          onclickmodify={this.modifyTask}
+          editeLine={this.state.editeLine}
+          onclickvalid={this.ValidTask}
+        />
+
       </div>
     )
   }
